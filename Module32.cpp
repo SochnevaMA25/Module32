@@ -135,21 +135,21 @@ protected:
 };
 
 
-TEST_F(SomeTestSuite, testcase1)        //òåñò êîòðûòèÿ ñîåäèíåíèÿ
+TEST_F(SomeTestSuite, testcase1)        
 {
     bool test = dbconn->openConnection();
     bool reference(true);
     ASSERT_EQ(test, reference);
 }
 
-TEST_F(SomeTestSuite, testcase2)        //òåñò, êîòîðûé ïîêàçûâàåò, ÷òî åñëè ñîåäèíåíèå íå îòêðûòî, òî äåëàòü çàïðîñ íåëüçÿ
+TEST_F(SomeTestSuite, testcase2)       
 {
     bool test = dbconn->useConnection("123");
     bool reference(false);
     ASSERT_EQ(test, reference);
 }
 
-TEST_F(SomeTestSuite, testcase3)        //òåñòèðîâàíèå çàïðîñîâ
+TEST_F(SomeTestSuite, testcase3)        
 {
     dbconn->openConnection();
     bool test = dbconn->useConnection("123");
@@ -157,7 +157,7 @@ TEST_F(SomeTestSuite, testcase3)        //òåñòèðîâàíèå çàïðîñ�
     ASSERT_EQ(test, reference);
 }
 
-TEST_F(SomeTestSuite, testcase4)        //òåñòèðîâàíèå ïîâòîðíîãî îòêðûòèÿ
+TEST_F(SomeTestSuite, testcase4)        
 {
     dbconn->openConnection();
     bool test = dbconn->openConnection();
@@ -165,7 +165,7 @@ TEST_F(SomeTestSuite, testcase4)        //òåñòèðîâàíèå ïîâòîð�
     ASSERT_EQ(test, reference);
 }
 
-TEST_F(SomeTestSuite, testcase5)        //òåñò íà îáìåí ñ èñïîëüçîâàíèåì ìîê-îáúåêòîâ
+TEST_F(SomeTestSuite, testcase5)        
 {
 
     //ñîçäàåì ìîê-îáúåêò
@@ -177,14 +177,10 @@ TEST_F(SomeTestSuite, testcase5)        //òåñò íà îáìåí ñ èñïîë
 
     EXPECT_CALL(mdbc, execQuery("123")).WillOnce(::testing::Return(true));
 
-
-    //çàïóñêàåì àëãîðèòì íà îáðàáîòêó
     ClassThatUsesDB CTUDB(&mdbc);
     bool result1 = CTUDB.openConnection();
     bool result2 = CTUDB.useConnection("123");
 
-
-    //ñðàâíèâàåì ïîëó÷åííûé ðåçóëüòàò ñ ðåôåðåíñîì
     ASSERT_EQ(true, result1);
     ASSERT_EQ(true, result2);
 }
